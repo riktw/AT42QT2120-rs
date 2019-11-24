@@ -1,0 +1,12 @@
+[package]
+name = "AT42QT2120"
+version = "0.1.0"
+authors = ["Rik te Winkel <rik@justanotherelectronicsblog.com>"]
+license = "GNU Lesser General Public License v3.0"
+description = "Platform agnostic Rust driver for the AT42QT2120"
+readme = "README.md"
+keywords = ["AT42QT2120", "driver", "touch", "embedded-hal-driver"]
+categories = ["embedded", "hardware-support", "no-std"]
+
+[dependencies]
+embedded-hal = "0.2.1"
