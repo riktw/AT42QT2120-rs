@@ -1,6 +1,6 @@
 [package]
 name = "AT42QT2120"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Rik <rik@justanotherelectronicsblog.com>"]
 repository = "https://github.com/riktw/AT42QT2120-rs"
 license = "LGPL-3.0"
