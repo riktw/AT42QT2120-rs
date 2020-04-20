@@ -15,11 +15,11 @@ Basic support works and is tested on hardware:
 - [x] Configurable slider/wheel
 - [x] Configurable key threshold
 - [x] Enable/disable keys
+- [x] Configurable detection integrator
 
 Most advanced configuration is not supported:
 - [ ] Configurable drift compensation
 - [ ] Configurable touch recal delay
-- [ ] Configurable detection integrator
 - [ ] Low power mode
 - [ ] Using Change pin as input
 - [ ] Configurable key oversampling

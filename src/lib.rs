@@ -62,9 +62,10 @@
 //! Basic features are supported:
 //! setting up and reading the slider/wheel
 //! setting up and reading keys.
+//! Calibration.
 //! 
 //! Not supported is:
-//! Calibrating, setting power mode, changing drift compensation and other advanced settings
+//! setting power mode, changing drift compensation and other advanced settings
 //! Grouping keys
 //! Setting oversampling on keys
 //! 
@@ -101,6 +102,9 @@ enum Register {
 	KEY_STATUS1 = 0x03,
 	KEY_STATUS2 = 0x04,
 	SLIDER_POSITION = 0x05,
+	CALIBRATE = 0x06,
+	RESET = 0x07,
+	DETECTION_INTEGRATOR = 0x0B,
 	SLIDER_OPTIONS = 0x0E,
 	KEY_THRESHOLD_START = 0x10,
 	KEY_CONTROL_START = 0x1C,
@@ -130,6 +134,29 @@ impl<I2C, E> At42qt2120<I2C>
 		}
 		Ok(())
 	}
+	
+	// Calibrate the device, needed in case keys are stuck or other issues.
+	pub fn calibrate(&mut self) -> Result<(), Error<E>> {
+        self.write_register(Register::CALIBRATE, 0x01)?;
+		Ok(())
+    }
+    
+	/// Checks if calibration is running.
+	pub fn calibration_running(&mut self) -> Result<bool, Error<E>> {
+        let status = self.read_register(Register::STATUS)?;
+        if status & (1 << 7) == (1 << 7) {
+          Ok(true)
+        }
+        else {
+          Ok(false)
+        }
+	}
+	
+	//todo 
+	pub fn set_detection_integrator(&mut self, value: u8) -> Result<(), Error<E>> {
+        self.write_register(Register::DETECTION_INTEGRATOR, value)?;
+		Ok(())
+    }
 	
 	/// Setup the slider settings, slider is false for slider, true for wheel.
 	pub fn setup_slider(&mut self, slider: bool, enabled: bool) -> Result<(), Error<E>> {
